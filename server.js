@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Conexión a MongoDB Atlas
+// Conexión a MongoDB 
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -23,17 +23,17 @@ const usuarioSchema = new mongoose.Schema({
 });
 const Usuario = mongoose.model("Usuario", usuarioSchema);
 
-// Modelo de dispositivo con imagen
+// Dispositivo 
 const dispositivoSchema = new mongoose.Schema({
   nombre: String,
   marca: String,
   tipo: String,
   descripcion: String,
-  imagen: String, // URL de la imagen
+  imagen: String, 
 });
 const Dispositivo = mongoose.model("Dispositivo", dispositivoSchema);
 
-// Modelo de comentarios
+// comentarios
 const comentarioSchema = new mongoose.Schema({
   dispositivoId: { type: mongoose.Schema.Types.ObjectId, required: true },
   usuario: { type: String, required: true },
@@ -53,7 +53,7 @@ app.post("/login", async (req, res) => {
   res.json({ message: "Login exitoso" });
 });
 
-// Rutas CRUD sin protección de autenticación
+// Rutas CRUD 
 app.get("/dispositivos", async (req, res) => {
   const dispositivos = await Dispositivo.find();
   res.json(dispositivos);
